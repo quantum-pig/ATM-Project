@@ -13,7 +13,7 @@ void deposit() {
     
     if (!validateAmount(amount)) {
         printf("存款金额无效！\n");
-        pause();
+        waitForKey();
         return;
     }
     
@@ -46,7 +46,7 @@ void deposit() {
             break;
         }
     }
-    pause();
+    waitForKey();
 }
 
 /**
@@ -62,7 +62,7 @@ void withdraw() {
     
     if (!validateAmount(amount)) {
         printf("取款金额无效！\n");
-        pause();
+        waitForKey();
         return;
     }
     
@@ -71,7 +71,7 @@ void withdraw() {
         if (strcmp(accounts[i].ID, currentAccount) == 0) {
             if (accounts[i].money < amount) {
                 printf("余额不足！当前余额: %.2f\n", accounts[i].money);
-                pause();
+                waitForKey();
                 return;
             }
             
@@ -101,7 +101,7 @@ void withdraw() {
             break;
         }
     }
-    pause();
+    waitForKey();
 }
 
 /**
@@ -119,14 +119,14 @@ void transfer() {
     
     if (!validateAccount(toAccountID)) {
         printf("对方账户不存在！\n");
-        pause();
+        waitForKey();
         return;
     }
     
     // 检查不能转给自己
     if (strcmp(toAccountID, currentAccount) == 0) {
         printf("不能转账给自己！\n");
-        pause();
+        waitForKey();
         return;
     }
     
@@ -135,7 +135,7 @@ void transfer() {
     
     if (!validateAmount(amount)) {
         printf("转账金额无效！\n");
-        pause();
+        waitForKey();
         return;
     }
     
@@ -152,7 +152,7 @@ void transfer() {
         if (strcmp(accounts[i].ID, currentAccount) == 0) {
             if (accounts[i].money < amount) {
                 printf("余额不足！当前余额: %.2f\n", accounts[i].money);
-                pause();
+                waitForKey();
                 return;
             }
             
@@ -185,7 +185,7 @@ void transfer() {
             break;
         }
     }
-    pause();
+    waitForKey();
 }
 
 /**
@@ -236,7 +236,7 @@ void queryAccount() {
             break;
         }
     }
-    pause();
+    waitForKey();
 }
 
 /**

@@ -54,9 +54,9 @@ void clearScreen() {
 }
 
 /**
- * 暂停函数
+ * 等待按键函数
  */
-void pause() {
+void waitForKey() {
     printf("\n按任意键继续...");
     getchar();
     getchar();

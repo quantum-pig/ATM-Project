@@ -6,6 +6,7 @@
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
+#include <unistd.h>
 
 // 常量定义
 #define MAX_ACCOUNTS 100        // 最大账户数量
@@ -80,7 +81,7 @@ void showMainMenu();
 void showLoginMenu();
 void showTransactionMenu();
 void clearScreen();
-void pause();
+void waitForKey();
 
 // 工具函数
 int validateAmount(double amount);
@@ -91,5 +92,9 @@ double calculateBalancePrediction(char* accountID);
 // 系统初始化函数
 void initializeSystem();
 void createTestData();
+
+// 密码输入验证函数
+int inputPassword(int* password, const char* prompt);
+void delayExit(const char* message, int seconds);
 
 #endif

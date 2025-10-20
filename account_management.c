@@ -6,7 +6,7 @@
  */
 int login() {
     char inputID[20];
-    int inputPassword[6];
+    int inputPwd[6];
     int encryptedPassword[6];
     
     printf("\n=== ATM 登录系统 ===\n");
@@ -16,18 +16,15 @@ int login() {
     // 检查账户是否被锁定
     if (isAccountLocked(inputID)) {
         printf("账户已被锁定，请联系银行客服！\n");
-        pause();
+        waitForKey();
         return 0;
     }
     
-    printf("请输入6位密码: ");
-    for (int i = 0; i < PASSWORD_LENGTH; i++) {
-        inputPassword[i] = getchar();
-        if (inputPassword[i] == '\n') {
-            i--;
-            continue;
-        }
-        inputPassword[i] -= '0';  // 转换为数字
+    // 使用安全的密码输入函数
+    if (!inputPassword(inputPwd, "请输入6位密码: ")) {
+        printf("密码输入无效！\n");
+        waitForKey();
+        return 0;
     }
     
     // 查找账户
@@ -41,12 +38,12 @@ int login() {
     
     if (accountIndex == -1) {
         printf("账户不存在！\n");
-        pause();
+        waitForKey();
         return 0;
     }
     
     // 加密输入的密码进行比较
-    encryptPassword(inputPassword, encryptedPassword);
+    encryptPassword(inputPwd, encryptedPassword);
     
     // 验证密码
     int passwordMatch = 1;
@@ -61,7 +58,7 @@ int login() {
         strcpy(currentAccount, inputID);
         accounts[accountIndex].wrongAttempts = 0;  // 重置错误次数
         printf("登录成功！欢迎 %s\n", accounts[accountIndex].name);
-        pause();
+        waitForKey();
         return 1;
     } else {
         accounts[accountIndex].wrongAttempts++;
@@ -71,7 +68,7 @@ int login() {
             lockAccount(inputID);
             printf("连续输入错误3次，账户已被锁定！\n");
         }
-        pause();
+        waitForKey();
         return 0;
     }
 }
@@ -85,26 +82,19 @@ void changePassword() {
     int confirmPassword[6];
     
     printf("\n=== 修改密码 ===\n");
-    printf("请输入新密码（6位数字）: ");
     
-    // 输入新密码
-    for (int i = 0; i < PASSWORD_LENGTH; i++) {
-        newPassword[i] = getchar();
-        if (newPassword[i] == '\n') {
-            i--;
-            continue;
-        }
-        newPassword[i] -= '0';
+    // 使用安全的密码输入函数输入新密码
+    if (!inputPassword(newPassword, "请输入新密码（6位数字）: ")) {
+        printf("新密码输入无效！\n");
+        waitForKey();
+        return;
     }
     
-    printf("请再次输入新密码确认: ");
-    for (int i = 0; i < PASSWORD_LENGTH; i++) {
-        confirmPassword[i] = getchar();
-        if (confirmPassword[i] == '\n') {
-            i--;
-            continue;
-        }
-        confirmPassword[i] -= '0';
+    // 使用安全的密码输入函数确认密码
+    if (!inputPassword(confirmPassword, "请再次输入新密码确认: ")) {
+        printf("确认密码输入无效！\n");
+        waitForKey();
+        return;
     }
     
     // 验证两次输入的密码是否一致
@@ -118,7 +108,7 @@ void changePassword() {
     
     if (!passwordMatch) {
         printf("两次输入的密码不一致，修改失败！\n");
-        pause();
+        waitForKey();
         return;
     }
     
@@ -131,7 +121,7 @@ void changePassword() {
             }
             printf("密码修改成功！\n");
             saveAccounts();
-            pause();
+            waitForKey();
             return;
         }
     }

@@ -80,3 +80,62 @@ double calculateBalancePrediction(char* accountID) {
     // 基于平均变化预测未来余额
     return currentBalance + averageChange;
 }
+
+/**
+ * 安全的密码输入函数，确保只接受6位数字
+ * @param password 用于存储密码的数组
+ * @param prompt 提示信息
+ * @return 成功返回1，失败返回0
+ */
+int inputPassword(int* password, const char* prompt) {
+    char input[20];  // 用于存储用户输入的字符串
+    int len = 0;
+    
+    printf("%s", prompt);
+    
+    // 读取用户输入
+    if (fgets(input, sizeof(input), stdin) == NULL) {
+        return 0;
+    }
+    
+    // 计算输入长度（不包括换行符）
+    len = strlen(input);
+    if (input[len - 1] == '\n') {
+        len--;
+    }
+    
+    // 检查长度是否为6
+    if (len != PASSWORD_LENGTH) {
+        printf("密码必须为6位数字！\n");
+        return 0;
+    }
+    
+    // 检查是否全为数字
+    for (int i = 0; i < len; i++) {
+        if (!isdigit(input[i])) {
+            printf("密码只能包含数字！\n");
+            return 0;
+        }
+        password[i] = input[i] - '0';
+    }
+    
+    return 1;
+}
+
+/**
+ * 延时退出函数，显示消息并等待指定时间
+ * @param message 要显示的消息
+ * @param seconds 延时秒数
+ */
+void delayExit(const char* message, int seconds) {
+    printf("%s\n", message);
+    printf("系统将在 %d 秒后继续...\n", seconds);
+    
+    // 倒计时显示
+    for (int i = seconds; i > 0; i--) {
+        printf("\r剩余时间: %d 秒", i);
+        fflush(stdout);
+        sleep(1);
+    }
+    printf("\r                    \r");  // 清除倒计时显示
+}

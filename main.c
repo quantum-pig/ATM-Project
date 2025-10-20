@@ -23,7 +23,7 @@ void initializeSystem() {
     loadStatements();
     
     printf("系统初始化完成！\n");
-    pause();
+    waitForKey();
 }
 
 /**
@@ -132,13 +132,13 @@ int main() {
                                 changePassword();
                                 break;
                             case 6:
-                                printf("退出登录，请保存好银行卡！\n");
+                                delayExit("退出登录，请保存好银行卡！", 3);
                                 strcpy(currentAccount, "");
                                 loginSuccess = 0;
                                 break;
                             default:
                                 printf("无效选择，请重新输入！\n");
-                                pause();
+                                waitForKey();
                         }
                         
                         if (choice == 6) break;
@@ -148,12 +148,12 @@ int main() {
                 
             case 2:
                 // 退出系统
-                printf("感谢使用ATM仿真系统！\n");
+                delayExit("感谢使用ATM仿真系统！", 3);
                 return 0;
                 
             default:
                 printf("无效选择，请重新输入！\n");
-                pause();
+                waitForKey();
         }
     }
     
