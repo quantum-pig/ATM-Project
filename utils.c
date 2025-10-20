@@ -92,6 +92,11 @@ int inputPassword(int* password, const char* prompt) {
     int len = 0;
     
     printf("%s", prompt);
+    fflush(stdout);  // 确保提示信息立即显示
+    
+    // 清空输入缓冲区
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
     
     // 读取用户输入
     if (fgets(input, sizeof(input), stdin) == NULL) {
@@ -100,7 +105,7 @@ int inputPassword(int* password, const char* prompt) {
     
     // 计算输入长度（不包括换行符）
     len = strlen(input);
-    if (input[len - 1] == '\n') {
+    if (len > 0 && input[len - 1] == '\n') {
         len--;
     }
     
