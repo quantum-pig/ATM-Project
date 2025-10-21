@@ -1,7 +1,0 @@
-/Users/xiaosihan/Documents/Cursor/ATM-Project/build/CMakeFiles/atm_gui.dir
-/Users/xiaosihan/Documents/Cursor/ATM-Project/build/CMakeFiles/edit_cache.dir
-/Users/xiaosihan/Documents/Cursor/ATM-Project/build/CMakeFiles/rebuild_cache.dir
-/Users/xiaosihan/Documents/Cursor/ATM-Project/build/CMakeFiles/list_install_components.dir
-/Users/xiaosihan/Documents/Cursor/ATM-Project/build/CMakeFiles/install.dir
-/Users/xiaosihan/Documents/Cursor/ATM-Project/build/CMakeFiles/install/local.dir
-/Users/xiaosihan/Documents/Cursor/ATM-Project/build/CMakeFiles/install/strip.dir
