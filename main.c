@@ -101,7 +101,12 @@ int main() {
     
     while (1) {
         showMainMenu();
-        scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1) {
+            // 清空输入缓冲区
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+            choice = 0;
+        }
         
         switch (choice) {
             case 1:
@@ -113,7 +118,12 @@ int main() {
                     // 登录成功，进入交易菜单
                     while (1) {
                         showTransactionMenu();
-                        scanf("%d", &choice);
+                        if (scanf("%d", &choice) != 1) {
+                            // 清空输入缓冲区
+                            int c;
+                            while ((c = getchar()) != '\n' && c != EOF);
+                            choice = 0;
+                        }
                         
                         switch (choice) {
                             case 1:

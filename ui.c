@@ -58,6 +58,8 @@ void clearScreen() {
  */
 void waitForKey() {
     printf("\n按任意键继续...");
-    getchar();
+    // 清空输入缓冲区
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
     getchar();
 }

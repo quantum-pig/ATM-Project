@@ -1,0 +1,25 @@
+{
+  "name": "atm-gui-system",
+  "version": "1.0.0",
+  "description": "现代化ATM仿真系统GUI版本",
+  "main": "main.c",
+  "scripts": {
+    "build": "cmake . && make",
+    "build-mac": "cmake -DCMAKE_BUILD_TYPE=Release . && make",
+    "build-windows": "cmake -G \"MinGW Makefiles\" . && mingw32-make",
+    "run": "./atm_gui",
+    "clean": "make clean && rm -rf CMakeFiles CMakeCache.txt",
+    "install-deps-mac": "brew install gtk+3 pkg-config cmake",
+    "install-deps-windows": "echo 请安装MSYS2并运行: pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-pkg-config mingw-w64-x86_64-cmake"
+  },
+  "keywords": ["atm", "gui", "gtk", "c", "banking"],
+  "author": "ATM Project Team",
+  "license": "MIT",
+  "dependencies": {
+    "gtk3": "^3.24.0"
+  },
+  "devDependencies": {
+    "cmake": "^3.16.0",
+    "pkg-config": "^0.29.0"
+  }
+}
