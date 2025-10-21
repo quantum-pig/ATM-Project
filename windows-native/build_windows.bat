@@ -1,4 +1,5 @@
 @echo off
+REM 设置代码页为UTF-8
 chcp 65001 >nul
 title ATM Windows原生版本构建器
 
