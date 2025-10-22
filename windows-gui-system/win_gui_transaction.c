@@ -193,6 +193,17 @@ void HandleConfirmButtonClick(HWND hwnd) {
             SendMessage(g_hMainWindow, WM_USER_TRANSACTION_SUCCESS, 0, 0);
         }
         
+        // 询问是否打印回单
+        int printReceipt = MessageBoxW(hwnd, 
+            L"交易成功！是否打印回单？", 
+            L"打印回单", 
+            MB_YESNO | MB_ICONQUESTION
+        );
+        
+        if (printReceipt == IDYES) {
+            HandleReceiptButtonClick(hwnd);
+        }
+        
         // 关闭交易窗口
         DestroyWindow(hwnd);
     } else {

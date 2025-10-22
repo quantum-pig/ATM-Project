@@ -4,6 +4,7 @@
 HWND g_hMainWindow = NULL;
 HWND g_hLoginWindow = NULL;
 HWND g_hTransactionWindow = NULL;
+HWND g_hChangePasswordWindow = NULL;
 HINSTANCE g_hInstance = NULL;
 
 // 字体句柄
@@ -133,15 +134,23 @@ void CreateMainWindowControls(HWND hwnd) {
         L"STATIC", L"ATM仿真系统",
         WS_VISIBLE | WS_CHILD | SS_CENTER,
         20, 20, 360, 40,
-        hwnd, (HMENU)ID_BALANCE_LABEL, g_hInstance, NULL
+        hwnd, NULL, g_hInstance, NULL
     );
     
     // 创建余额显示标签
     HWND hBalanceLabel = CreateWindowW(
         L"STATIC", L"当前余额: 0.00 元",
         WS_VISIBLE | WS_CHILD | SS_CENTER,
-        20, 70, 360, 30,
+        20, 70, 180, 30,
         hwnd, (HMENU)ID_BALANCE_LABEL, g_hInstance, NULL
+    );
+    
+    // 创建卡号显示标签
+    HWND hCardNumberLabel = CreateWindowW(
+        L"STATIC", L"卡号: 未登录",
+        WS_VISIBLE | WS_CHILD | SS_CENTER,
+        200, 70, 180, 30,
+        hwnd, (HMENU)ID_CARD_NUMBER_LABEL, g_hInstance, NULL
     );
     
     // 创建功能按钮
@@ -336,11 +345,82 @@ void CreateTransactionWindowControls(HWND hwnd, int transactionType) {
         hwnd, (HMENU)ID_CANCEL_BUTTON, g_hInstance, NULL
     );
     
-    HWND hReceiptButton = CreateWindowW(
-        L"BUTTON", L"打印回单",
+    // 移除打印回单按钮，现在在交易成功后询问
+    
+    // 设置字体
+    SetControlFont(hwnd, "Microsoft YaHei", 12);
+}
+
+/**
+ * 创建修改密码窗口控件
+ */
+void CreateChangePasswordWindowControls(HWND hwnd) {
+    // 创建标题标签
+    HWND hTitleLabel = CreateWindowW(
+        L"STATIC", L"修改密码",
+        WS_VISIBLE | WS_CHILD | SS_CENTER,
+        20, 20, 360, 30,
+        hwnd, NULL, g_hInstance, NULL
+    );
+    
+    // 创建旧密码输入标签和编辑框
+    HWND hOldPasswordLabel = CreateWindowW(
+        L"STATIC", L"旧密码:",
+        WS_VISIBLE | WS_CHILD,
+        50, 70, 80, 20,
+        hwnd, NULL, g_hInstance, NULL
+    );
+    
+    HWND hOldPasswordEdit = CreateWindowW(
+        L"EDIT", L"",
+        WS_VISIBLE | WS_CHILD | WS_BORDER | ES_PASSWORD | ES_AUTOHSCROLL,
+        140, 70, 200, 25,
+        hwnd, (HMENU)ID_OLD_PASSWORD_EDIT, g_hInstance, NULL
+    );
+    
+    // 创建新密码输入标签和编辑框
+    HWND hNewPasswordLabel = CreateWindowW(
+        L"STATIC", L"新密码:",
+        WS_VISIBLE | WS_CHILD,
+        50, 110, 80, 20,
+        hwnd, NULL, g_hInstance, NULL
+    );
+    
+    HWND hNewPasswordEdit = CreateWindowW(
+        L"EDIT", L"",
+        WS_VISIBLE | WS_CHILD | WS_BORDER | ES_PASSWORD | ES_AUTOHSCROLL,
+        140, 110, 200, 25,
+        hwnd, (HMENU)ID_NEW_PASSWORD_EDIT, g_hInstance, NULL
+    );
+    
+    // 创建确认新密码输入标签和编辑框
+    HWND hConfirmPasswordLabel = CreateWindowW(
+        L"STATIC", L"确认新密码:",
+        WS_VISIBLE | WS_CHILD,
+        50, 150, 80, 20,
+        hwnd, NULL, g_hInstance, NULL
+    );
+    
+    HWND hConfirmPasswordEdit = CreateWindowW(
+        L"EDIT", L"",
+        WS_VISIBLE | WS_CHILD | WS_BORDER | ES_PASSWORD | ES_AUTOHSCROLL,
+        140, 150, 200, 25,
+        hwnd, (HMENU)ID_CONFIRM_PASSWORD_EDIT, g_hInstance, NULL
+    );
+    
+    // 创建按钮
+    HWND hConfirmButton = CreateWindowW(
+        L"BUTTON", L"确认修改",
         WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
-        300, 160, 80, 35,
-        hwnd, (HMENU)ID_RECEIPT_BUTTON, g_hInstance, NULL
+        120, 200, 100, 35,
+        hwnd, (HMENU)ID_CHANGE_PASSWORD_CONFIRM_BUTTON, g_hInstance, NULL
+    );
+    
+    HWND hCancelButton = CreateWindowW(
+        L"BUTTON", L"取消",
+        WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
+        240, 200, 100, 35,
+        hwnd, (HMENU)ID_CHANGE_PASSWORD_CANCEL_BUTTON, g_hInstance, NULL
     );
     
     // 设置字体

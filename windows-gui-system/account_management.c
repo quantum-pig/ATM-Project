@@ -76,6 +76,23 @@ int changePassword_gui(int* newPassword, int* confirmPassword) {
     // 找到当前账户并更新密码
     for (int i = 0; i < accountCount; i++) {
         if (strcmp(accounts[i].ID, currentAccount) == 0) {
+            // 验证新密码不能与旧密码相同
+            int isSamePassword = 1;
+            int decryptedOldPassword[6];
+            decryptPassword(accounts[i].password, decryptedOldPassword);
+            
+            for (int j = 0; j < PASSWORD_LENGTH; j++) {
+                if (newPassword[j] != decryptedOldPassword[j]) {
+                    isSamePassword = 0;
+                    break;
+                }
+            }
+            
+            if (isSamePassword) {
+                return -1;  // 新密码不能与旧密码相同
+            }
+            
+            // 加密新密码并保存
             int encryptedNewPassword[6];
             encryptPassword(newPassword, encryptedNewPassword);
             for (int j = 0; j < PASSWORD_LENGTH; j++) {

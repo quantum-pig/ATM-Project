@@ -25,6 +25,14 @@
 #define ID_CHANGE_PASSWORD_BUTTON 3005
 #define ID_LOGOUT_BUTTON 3006
 #define ID_BALANCE_LABEL 3007
+#define ID_CARD_NUMBER_LABEL 3008
+
+// 修改密码窗口控件
+#define ID_OLD_PASSWORD_EDIT 5001
+#define ID_NEW_PASSWORD_EDIT 5002
+#define ID_CONFIRM_PASSWORD_EDIT 5003
+#define ID_CHANGE_PASSWORD_CONFIRM_BUTTON 5004
+#define ID_CHANGE_PASSWORD_CANCEL_BUTTON 5005
 
 // 交易窗口控件
 #define ID_AMOUNT_EDIT 4001
@@ -44,6 +52,7 @@
 extern HWND g_hMainWindow;
 extern HWND g_hLoginWindow;
 extern HWND g_hTransactionWindow;
+extern HWND g_hChangePasswordWindow;
 extern HINSTANCE g_hInstance;
 
 // 函数声明
@@ -51,16 +60,19 @@ extern HINSTANCE g_hInstance;
 LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK LoginWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK TransactionWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK ChangePasswordWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 // 窗口创建函数
 HWND CreateMainWindow(HINSTANCE hInstance);
 HWND CreateLoginWindow(HINSTANCE hInstance);
 HWND CreateTransactionWindow(HINSTANCE hInstance, int transactionType);
+HWND CreateChangePasswordWindow(HINSTANCE hInstance);
 
 // 控件创建函数
 void CreateMainWindowControls(HWND hwnd);
 void CreateLoginWindowControls(HWND hwnd);
 void CreateTransactionWindowControls(HWND hwnd, int transactionType);
+void CreateChangePasswordWindowControls(HWND hwnd);
 
 // 消息处理函数
 void HandleLoginButtonClick(HWND hwnd);
@@ -100,6 +112,7 @@ void ShowTransactionWindow(int transactionType);
 void HideTransactionWindow();
 void HandleConfirmButtonClick(HWND hwnd);
 void HandleReceiptButtonClick(HWND hwnd);
+void HandleChangePasswordConfirmButtonClick(HWND hwnd);
 
 // 主程序函数
 void HandleLoginSuccess();
